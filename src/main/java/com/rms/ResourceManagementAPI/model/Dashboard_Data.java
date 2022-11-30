@@ -18,8 +18,8 @@ public class Dashboard_Data {
 
      String squad;
      String tribe;
-     BigInteger EMPL_NUMBER;
-     double AVGPRIORITY;
+     BigInteger empl_number;
+     double avgPriority;
 
 
      List<EmployeeData> EmpData;

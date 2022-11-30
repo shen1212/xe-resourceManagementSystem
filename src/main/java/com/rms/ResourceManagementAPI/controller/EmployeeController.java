@@ -1,28 +1,22 @@
 package com.rms.ResourceManagementAPI.controller;
 
-import com.rms.ResourceManagementAPI.Response.ResponseHandler;
 import com.rms.ResourceManagementAPI.dao.EmployeeRepository;
 import com.rms.ResourceManagementAPI.dao.EmployeeDataInterface;
 import com.rms.ResourceManagementAPI.model.AvgPriority;
 import com.rms.ResourceManagementAPI.model.Dashboard_Data;
 import com.rms.ResourceManagementAPI.model.Employee;
 import com.rms.ResourceManagementAPI.model.EmployeeData;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@RequiredArgsConstructor
 public class EmployeeController {
-    @Autowired
-    private EmployeeRepository repository;
-    @Autowired
-    private EmployeeDataInterface dashboard;
+
+    private final EmployeeRepository repository;
+    private final EmployeeDataInterface dashboard;
 
     @PostMapping("/saveEmployee")
     public String saveEmployee(@RequestBody Employee employee){
@@ -46,7 +40,7 @@ public class EmployeeController {
     }
 
     @GetMapping("/getDashboardData")
-    public List<Dashboard_Data> FEDashboardReponse(){return dashboard.FEDashboardReponse();};
+    public List<Dashboard_Data> FEDashboardReponse(){ return dashboard.FEDashboardReponse();};
     @GetMapping("/getAvgPriority")
     public List<AvgPriority> findSquadPriority() {
         return repository.findSquadPriority();
@@ -55,11 +49,6 @@ public class EmployeeController {
     @GetMapping("/getEmpData/{squad}")
     public List<EmployeeData> findEmpData(@PathVariable String squad) {
         return repository.findEmpData(squad);
-    }
-
-    @GetMapping("/getEmployee")
-    public List<Employee> getEmployeesBySquad(@PathVariable String squad){
-        return repository.findBySquad(squad);
     }
 
 }
