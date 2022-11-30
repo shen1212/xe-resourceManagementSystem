@@ -1,6 +1,6 @@
 package com.rms.ResourceManagementAPI.service;
 
-import com.rms.ResourceManagementAPI.model.Contractor;
+import com.rms.ResourceManagementAPI.entity.Contractor;
 import com.rms.ResourceManagementAPI.repository.ContractorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +26,10 @@ public class ContractorServiceImpl implements ContractorService{
 
     @Override
     public Optional<Contractor> getSpecificContractor(UUID contractorUUID) {
+        //if else and throw 404 if not found.
         return contractorRepository.findById(contractorUUID);
+
+//         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
 

@@ -1,6 +1,6 @@
 package com.rms.ResourceManagementAPI.service;
 
-import com.rms.ResourceManagementAPI.model.User;
+import com.rms.ResourceManagementAPI.entity.User;
 
 import java.util.List;
 import java.util.Optional;

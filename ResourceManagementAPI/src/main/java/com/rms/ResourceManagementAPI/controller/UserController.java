@@ -1,13 +1,14 @@
 package com.rms.ResourceManagementAPI.controller;
 
 
-import com.rms.ResourceManagementAPI.model.User;
+import com.rms.ResourceManagementAPI.entity.User;
 import com.rms.ResourceManagementAPI.response.ResponseHandler;
 import com.rms.ResourceManagementAPI.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.HttpClientErrorException;
 
 import java.util.UUID;
 
@@ -18,26 +19,34 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("/add")
+
+    @PutMapping
     public String add(@RequestBody User user){
         userService.saveUser(user);
-        return "New user added";
+        return "New user added through HTTP PUT method";
     }
-
 
     @GetMapping("/getAll")
     public ResponseEntity<Object> getAllUsers(){
-        return ResponseHandler.reponseBuilder("Requested All Users",
+        return ResponseHandler.responseBuilder("Requested All Users",
                 HttpStatus.OK,
                 userService.getAllUsers());
     }
 
 
+    //FIXME - Logic should be in UserServiceImpl.
     @GetMapping("/{userUUID}")
     public ResponseEntity<Object> getSpecificUser(@PathVariable("userUUID") UUID userUUID) {
-        return ResponseHandler.reponseBuilder("Requested Specific User",
-                HttpStatus.OK,
-                userService.getSpecificUser(userUUID));
+
+        if(userService.existsUserByUserId(userUUID)){
+            return ResponseHandler.responseBuilder("Requested Specific User",
+                    HttpStatus.OK,
+                    userService.getSpecificUser(userUUID));
+        }
+        else{
+            return ResponseHandler.responseBuilder("Request user ID not found",
+                    HttpStatus.NOT_FOUND,"User id: "+userUUID+" cannot be found in the user table");
+        }
     }
 
 }

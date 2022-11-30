@@ -1,6 +1,6 @@
 package com.rms.ResourceManagementAPI.service;
 
-import com.rms.ResourceManagementAPI.model.Contractor;
+import com.rms.ResourceManagementAPI.entity.Contractor;
 
 import java.util.List;
 import java.util.Optional;

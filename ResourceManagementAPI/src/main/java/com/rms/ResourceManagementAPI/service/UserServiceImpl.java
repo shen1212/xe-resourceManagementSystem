@@ -1,6 +1,6 @@
 package com.rms.ResourceManagementAPI.service;
 
-import com.rms.ResourceManagementAPI.model.User;
+import com.rms.ResourceManagementAPI.entity.User;
 import com.rms.ResourceManagementAPI.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,6 +27,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Optional<User> getSpecificUser(UUID userUUID) {
+
         return userRepository.findById(userUUID);
     }
 
@@ -35,7 +36,5 @@ public class UserServiceImpl implements UserService{
         if(this.getSpecificUser(userUUID).isEmpty()){return false;}
         else{return true;}
 
-//        if(userRepository.findById(userUUID).isPresent()){return true;}
-//        else{return false;}
     }
 }
