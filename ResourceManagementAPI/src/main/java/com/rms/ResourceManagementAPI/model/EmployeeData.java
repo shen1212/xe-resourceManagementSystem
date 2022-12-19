@@ -1,10 +1,12 @@
 package com.rms.ResourceManagementAPI.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
 
+import javax.persistence.Column;
 import java.math.BigInteger;
 import java.util.Date;
 
@@ -13,10 +15,15 @@ import java.util.Date;
 @NoArgsConstructor
 @ToString
 public class EmployeeData {
-private String name;
-private String email;
-private Date end_contract;
-private Integer priority;
+    @Column(name="name")
+    private String name;
+    @Column(name="email")
+    private String email;
+    @JsonFormat(pattern="yyyy-mm-dd")
+    @Column(name="end_contract")
+    private Date end_contract;
+    @Column(name="priority")
+    private Integer priority;
 
     public String getName() {
         return name;

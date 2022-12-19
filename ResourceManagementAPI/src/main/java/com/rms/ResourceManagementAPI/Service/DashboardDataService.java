@@ -1,4 +1,4 @@
-package com.rms.ResourceManagementAPI.Service;
+package com.rms.ResourceManagementAPI.service;
 
 import com.rms.ResourceManagementAPI.dao.EmployeeRepository;
 import com.rms.ResourceManagementAPI.model.AvgPriority;
@@ -25,9 +25,9 @@ public class DashboardDataService implements EmployeeDataInterface{
 
 
         for (AvgPriority x: squadInfo){
-            Dashboard_Data new_result = new Dashboard_Data(x.getSQUAD(),
-                    x.getTRIBE(), x.getEMPL_NUMBER(), x.getAVGPRIORITY(), null);
-            List<EmployeeData> empData = repository.findEmpData(x.getSQUAD());
+            Dashboard_Data new_result = new Dashboard_Data(x.getSquad(),
+                    x.getTribe(), x.getEmpl_number(), x.getAvgpriority(), null);
+            List<EmployeeData> empData = repository.findEmpData(x.getSquad());
             new_result.setEmpData(empData);
             result.add(new_result);
         }
